@@ -7,11 +7,14 @@ public class Camera : MonoBehaviour {
         LEFT, RIGHT
     }
 
+    //Camera rotating values
+    public float rotationSpeed;
+    private bool rotating = false;
+    private Direction direction;
+
+
     public GameObject player;
-
     private Vector3 offset;
-
-    private bool updateCamera = false;
 
 	void Start () {
         offset = transform.position - player.transform.position;
@@ -19,20 +22,19 @@ public class Camera : MonoBehaviour {
     }
 
     void Update() {
-        
-        if (Input.GetButton("Shift")) {
-            if (Input.GetAxis("Horizontal") == 0) {
-                updateCamera = true;
+        if (Input.GetButton("Shift") && !rotating) {
+            if (Input.GetAxis("Horizontal") > 0 && !rotating) {
+                direction = Direction.RIGHT;
+                rotating = true;    
+            } else if (Input.GetAxis("Horizontal") < 0 && !rotating) {
+                direction = Direction.LEFT;
+                rotating = true;
             }
-            else if (Input.GetAxis("Horizontal") > 0 && updateCamera) {
-                rotateCamera(Direction.RIGHT);
-                updateCamera = false;
-                Debug.Log("Rotation -90");
-            } else if (Input.GetAxis("Horizontal") < 0 && updateCamera) {
-                rotateCamera(Direction.LEFT);
-                updateCamera = false;
-                Debug.Log("Rotation 90");
-            }
+        }
+        if (rotating) {
+            
+            transform.RotateAround(player.transform.position, rotationSpeed);
+            rotating = false;
         }
     }
 	
