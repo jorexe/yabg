@@ -22,25 +22,23 @@ public class Camera : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetButton("Shift") && !rotating) {
-            if (Input.GetAxis("Horizontal") > 0 && !rotating) {
-                direction = Direction.RIGHT;
-                rotating = true;    
-            } else if (Input.GetAxis("Horizontal") < 0 && !rotating) {
-                direction = Direction.LEFT;
-                rotating = true;
-            }
-        }
-        if (rotating) {
+        //if (Input.GetButton("Shift") && !rotating) {
+        //    if (Input.GetAxis("Horizontal") > 0 && !rotating) {
+        //        direction = Direction.RIGHT;
+        //        rotating = true;    
+        //    } else if (Input.GetAxis("Horizontal") < 0 && !rotating) {
+        //        direction = Direction.LEFT;
+        //        rotating = true;
+        //    }
+        //}
+        //if (rotating) {
             
-            transform.RotateAround(player.transform.position, rotationSpeed);
-            rotating = false;
-        }
+        //}
     }
 	
-	void LateUpdate () {
-        transform.position = player.transform.position + offset;
-	}
+	//void LateUpdate () {
+ //       transform.position = player.transform.position + offset;
+	//}
 
     private void rotateCamera(Direction direction) {
         switch(direction) {
