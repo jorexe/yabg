@@ -9,15 +9,12 @@ public class CameraRotator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.position = player.transform.position;
-        if (Input.GetButton("Shift"))
-        {
-            if (Input.GetAxis("Horizontal") > 0)
-            {
+        if (Input.GetButton("Shift")) {
+            if (Input.GetAxis("Horizontal") > 0) {
                 transform.Rotate(new Vector3(0f, -speed * Time.deltaTime,0f));
 
             }
-            else if (Input.GetAxis("Horizontal") < 0)
-            {
+            else if (Input.GetAxis("Horizontal") < 0) {
                 transform.Rotate(new Vector3(0f, speed * Time.deltaTime, 0f));
             }
         }

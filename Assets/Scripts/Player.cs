@@ -4,9 +4,10 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     public float speed;
+    public SphereMaterial sphereMaterial = SphereMaterial.WOOD;
 
     private Rigidbody rb;
-    public GameObject mainCamera;   
+    public GameObject mainCamera;
 
     void Start () {
         rb = GetComponent<Rigidbody>();
