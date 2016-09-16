@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum SphereMaterial {
+public enum SphereMaterialType {
     WOOD,
     STONE,
     PAPER,
-    GLASS
+    GLASS;
 }

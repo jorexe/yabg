@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MaterialPicker : MonoBehaviour {
 
+    public static Dictionary<SphereMaterialType, >
     public SphereMaterial sphereMaterial;
 
     void OnTriggerEnter(Collider other) {
