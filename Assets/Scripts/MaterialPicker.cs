@@ -3,13 +3,18 @@ using System.Collections;
 
 public class MaterialPicker : MonoBehaviour {
 
-    public static Dictionary<SphereMaterialType, >
-    public SphereMaterial sphereMaterial;
+    public SphereMaterialType SphereMaterialType;
+    private MeshRenderer mr;
+
+    void Start() {
+        mr = GetComponent<MeshRenderer>();
+        mr.material = MaterialManager.Instance.getMaterial(SphereMaterialType);
+    }
 
     void OnTriggerEnter(Collider other) {
-        Player player = other.gameObject.GetComponent<Player>();
-        if (player != null && player.sphereMaterial != sphereMaterial) {
-            player.sphereMaterial = sphereMaterial;
+        Sphere sphere = other.gameObject.GetComponent<Sphere>();
+        if (sphere != null && sphere.SphereMaterialType != SphereMaterialType) {
+            sphere.setMaterial(SphereMaterialType);
         }
     }
 }

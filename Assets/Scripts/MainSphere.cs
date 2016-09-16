@@ -1,17 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class MainSphere: Sphere {
 
-    public float speed;
-    public SphereMaterial sphereMaterial = SphereMaterial.WOOD;
-
-    private Rigidbody rb;
+    
     public GameObject mainCamera;
-
-    void Start () {
-        rb = GetComponent<Rigidbody>();
-	}
 	
 	void FixedUpdate () {
         if (!Input.GetButton("Shift")){

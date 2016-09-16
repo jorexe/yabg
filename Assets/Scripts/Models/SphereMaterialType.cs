@@ -5,5 +5,5 @@ public enum SphereMaterialType {
     WOOD,
     STONE,
     PAPER,
-    GLASS;
+    GLASS
 }
