@@ -10,8 +10,9 @@ public class MainSphere: Sphere {
         if (!Input.GetButton("Shift")){
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
-            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-            rb.AddForce(mainCamera.transform.TransformDirection(movement) * speed);
+            Vector3 movement = mainCamera.transform.TransformDirection(new Vector3(moveHorizontal, 0.0f, moveVertical));
+            movement.y = 0;
+            rb.AddForce(movement * speed);
         }
 	}
 }

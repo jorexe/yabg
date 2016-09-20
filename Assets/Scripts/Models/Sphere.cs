@@ -11,10 +11,12 @@ public class Sphere: MonoBehaviour {
 
     public Rigidbody rb;
     public MeshRenderer mr;
+    public MeshFilter mf;
 
     void Start() {
         rb = GetComponent<Rigidbody>();
         mr = GetComponent<MeshRenderer>();
+        mf = GetComponent<MeshFilter>();
         if (sphereMaterial == null) {
             setMaterial(SphereMaterialType);
         }
@@ -33,11 +35,15 @@ public class Sphere: MonoBehaviour {
             case SphereMaterialType.STONE:
                 sphereMaterial = new StoneMaterial();
                 break;
+            case SphereMaterialType.PAPER:
+                sphereMaterial = new PaperMaterial();
+                break;
             default:
                 Debug.LogError("Material not implemented: " + material);
                 break;
         }
         mr.material = MaterialManager.Instance.getMaterial(material);
+        mf.mesh = MaterialManager.Instance.getMesh(material);
         updateMaterialPhysics();
     }
 
