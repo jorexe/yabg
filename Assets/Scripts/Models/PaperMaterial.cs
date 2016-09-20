@@ -8,7 +8,7 @@ public class PaperMaterial : SphereMaterial {
 
     public override float AngularDrag { get { return 0.4f; } }
 
-    public override float Mass { get { return 0.2f; } }
+    public override float Mass { get { return 0.25f; } }
 
     public override float Speed { get { return 4f; } }
 

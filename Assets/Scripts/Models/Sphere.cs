@@ -12,11 +12,15 @@ public class Sphere: MonoBehaviour {
     public Rigidbody rb;
     public MeshRenderer mr;
     public MeshFilter mf;
+    SphereCollider sphereCollider;
+    MeshCollider meshCollider;
 
     void Start() {
         rb = GetComponent<Rigidbody>();
         mr = GetComponent<MeshRenderer>();
         mf = GetComponent<MeshFilter>();
+        meshCollider = GetComponent<MeshCollider>();
+        sphereCollider = GetComponent<SphereCollider>();
         if (sphereMaterial == null) {
             setMaterial(SphereMaterialType);
         }
@@ -53,5 +57,12 @@ public class Sphere: MonoBehaviour {
         rb.angularDrag = sphereMaterial.AngularDrag;
         rb.useGravity = sphereMaterial.UseGravity;
         speed = sphereMaterial.Speed;
+        if (SphereMaterialType == SphereMaterialType.PAPER) {
+            meshCollider.enabled = true;
+            sphereCollider.enabled = false;
+        } else {
+            sphereCollider.enabled = true;
+            meshCollider.enabled = false;
+        }
     }
 }
