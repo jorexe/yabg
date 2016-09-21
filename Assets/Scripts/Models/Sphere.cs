@@ -42,6 +42,9 @@ public class Sphere: MonoBehaviour {
             case SphereMaterialType.PAPER:
                 sphereMaterial = new PaperMaterial();
                 break;
+            case SphereMaterialType.FUTURISTIC:
+                sphereMaterial = new FuturisticMaterial();
+                break;
             default:
                 Debug.LogError("Material not implemented: " + material);
                 break;

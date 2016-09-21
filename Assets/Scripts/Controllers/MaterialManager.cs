@@ -23,10 +23,12 @@ public class MaterialManager : MonoBehaviour {
     public Material WoodenMaterial;
     public Material StoneMaterial;
     public Material PaperMaterial;
+    public Material FuturisticMaterial;
 
     [Header("Meshes")]
     public Mesh StandardMesh;
     public Mesh PaperMesh;
+    public Mesh FuturisticMesh;
 
     public Material getMaterial(SphereMaterialType material) {
         switch(material) {
@@ -36,6 +38,8 @@ public class MaterialManager : MonoBehaviour {
                 return StoneMaterial;
             case SphereMaterialType.PAPER:
                 return PaperMaterial;
+            case SphereMaterialType.FUTURISTIC:
+                return FuturisticMaterial;
         }
         return null;
     }
@@ -45,6 +49,8 @@ public class MaterialManager : MonoBehaviour {
             case SphereMaterialType.WOOD:
             case SphereMaterialType.STONE:
                 return StandardMesh;
+            case SphereMaterialType.FUTURISTIC:
+                return FuturisticMesh;
             case SphereMaterialType.PAPER:
                 return PaperMesh;
         }
