@@ -8,9 +8,9 @@ public class StoneMaterial : SphereMaterial {
 
     public override float AngularDrag { get { return 0.4f; } }
 
-    public override float Mass { get { return 1f; } }
+    public override float Mass { get { return 9f; } }
 
-    public override float Speed { get { return 4f; } }
+    public override float Speed { get { return 30f; } }
 
     public override SphereMaterialType SphereMaterialType { get { return SphereMaterialType.WOOD; } }
 

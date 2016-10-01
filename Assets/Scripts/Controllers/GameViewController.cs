@@ -38,6 +38,10 @@ public class GameViewController : MonoBehaviour {
         scoreText.text = score.ToString();
     }
 
+    public void OnGoalReached() {
+        Debug.Log("You win");
+    }
+ 
     IEnumerator DecreaseScore() {
         while (playing) {
             if (score > 0) {
