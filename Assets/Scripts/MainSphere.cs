@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class MainSphere: Sphere {
-
-    
     public GameObject mainCamera;
 	
 	void FixedUpdate () {

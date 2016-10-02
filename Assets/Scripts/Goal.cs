@@ -25,12 +25,7 @@ public class Goal : MonoBehaviour {
 
         Sphere sphere = other.gameObject.GetComponent<Sphere>();
         if (sphere != null) {
-            GameViewController gameViewController = FindObjectOfType<GameViewController>();
-
-            if (gameViewController != null) {
-                gameViewController.OnGoalReached();
-            }
-
+            GameViewController.Instance.OnGoalReached();
             enabled = false;
         }
     }

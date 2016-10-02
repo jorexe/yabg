@@ -8,6 +8,8 @@ public class GameViewController : MonoBehaviour {
 
     public static GameViewController Instance { get { return instance; } }
 
+    public LevelBottom levelBottom;
+
     void Awake() {
         if (instance != null && instance != this) {
             Destroy(this.gameObject);
@@ -40,6 +42,11 @@ public class GameViewController : MonoBehaviour {
 
     public void OnGoalReached() {
         Debug.Log("You win");
+    }
+
+    public void OnPlayerDied() {
+        Debug.Log("player died");
+        //levelBottom.Toggle();
     }
  
     IEnumerator DecreaseScore() {
