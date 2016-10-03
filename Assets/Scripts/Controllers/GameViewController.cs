@@ -8,7 +8,21 @@ public class GameViewController : MonoBehaviour {
 
     public static GameViewController Instance { get { return instance; } }
 
+    private const int INITIAL_SCORE = 10000;
+
     public LevelBottom levelBottom;
+    public GameObject[] levelPrefabs;
+    private GameObject currentLevel;
+
+    private int currentLevelIdx;
+
+    public int score = INITIAL_SCORE;
+    public float decreaseRate = 0.2f;
+    public bool playing = false;
+    public GameObject levelWonPanel;
+    public GameObject playerDiedPanel;
+
+    public Text scoreText;
 
     void Awake() {
         if (instance != null && instance != this) {
@@ -16,14 +30,11 @@ public class GameViewController : MonoBehaviour {
         } else {
             instance = this;
         }
+
+        currentLevel = null;
+        currentLevelIdx = 0;
         //DontDestroyOnLoad(transform.gameObject);
     }
-
-    public int score = 10000;
-    public float decreaseRate = 0.2f;
-    public bool playing = true;
-
-    public Text scoreText;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +42,17 @@ public class GameViewController : MonoBehaviour {
 	}
 
 	void StartGame() {
+        // Reset previous state
+        levelWonPanel.SetActive(false);
+        score = INITIAL_SCORE;
+
+        // Start level
+        if (currentLevel != null) {
+            Destroy(currentLevel);
+            currentLevel = null;
+        }
+
+        currentLevel = Instantiate(levelPrefabs[currentLevelIdx]);
         playing = true;
         StartCoroutine("DecreaseScore");
     }
@@ -41,12 +63,32 @@ public class GameViewController : MonoBehaviour {
     }
 
     public void OnGoalReached() {
-        Debug.Log("You win");
+        playing = false;
+        DisableSphere();
+        levelWonPanel.SetActive(true);
+    }
+
+    private void DisableSphere() {
+        FindObjectOfType<MainSphere>().gameObject.SetActive(false);
+    }
+
+    public void OnContinueClicked() {
+        currentLevelIdx++;
+        StartGame();
+    }
+
+    public void OnRestartClicked() {
+        levelBottom.Toggle();
+        // Reinstantiate the level
+        // This will reset player pos, see-saw rotations, powerups, boxes, etc.
+        StartGame();
+        playerDiedPanel.SetActive(false);
     }
 
     public void OnPlayerDied() {
-        Debug.Log("player died");
-        //levelBottom.Toggle();
+        playing = false;
+        DisableSphere();
+        playerDiedPanel.SetActive(true);
     }
  
     IEnumerator DecreaseScore() {
