@@ -25,6 +25,7 @@ public class GameViewController : MonoBehaviour {
     public GameObject levelWonPanel;
     public GameObject playerDiedPanel;
     public GameObject pausePanel;
+    public Text scoreLabel;
 
     public Text scoreText;
 
@@ -88,6 +89,7 @@ public class GameViewController : MonoBehaviour {
         playing = false;
         SetSphereActive(false);
         levelWonPanel.SetActive(true);
+        scoreLabel.text = score.ToString();
     }
 
     private void SetSphereActive(bool active) {
@@ -95,6 +97,11 @@ public class GameViewController : MonoBehaviour {
     }
 
     public void OnContinueClicked() {
+        if (currentLevelIdx == levelPrefabs.Length - 1) {
+            OnExitMenuClicked();
+            return;
+        }
+
         currentLevelIdx++;
         StartGame();
     }
