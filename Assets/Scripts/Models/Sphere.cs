@@ -63,9 +63,11 @@ public class Sphere: MonoBehaviour {
         if (SphereMaterialType == SphereMaterialType.PAPER) {
             meshCollider.enabled = true;
             sphereCollider.enabled = false;
+           // transform.scale
         } else {
             sphereCollider.enabled = true;
             meshCollider.enabled = false;
+            //transform.localScale.Set(1f, 1f, 1f);
         }
     }
 }

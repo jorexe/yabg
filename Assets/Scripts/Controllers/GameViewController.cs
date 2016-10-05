@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameViewController : MonoBehaviour {
 
@@ -19,8 +20,11 @@ public class GameViewController : MonoBehaviour {
     public int score = INITIAL_SCORE;
     public float decreaseRate = 0.2f;
     public bool playing = false;
+    public bool paused = false;
+
     public GameObject levelWonPanel;
     public GameObject playerDiedPanel;
+    public GameObject pausePanel;
 
     public Text scoreText;
 
@@ -33,7 +37,6 @@ public class GameViewController : MonoBehaviour {
 
         currentLevel = null;
         currentLevelIdx = 0;
-        //DontDestroyOnLoad(transform.gameObject);
     }
 
 	// Use this for initialization
@@ -57,6 +60,25 @@ public class GameViewController : MonoBehaviour {
         StartCoroutine("DecreaseScore");
     }
 
+    void Update() {
+        if (Input.GetKeyUp(KeyCode.Escape) && !paused) {
+            paused = true;
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    public void OnUnpauseClicked() {
+        paused = false;
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void OnExitMenuClicked() {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
+    }
+
     public void IncreaseScore(int amount) {
         score += amount;
         scoreText.text = score.ToString();
@@ -64,12 +86,12 @@ public class GameViewController : MonoBehaviour {
 
     public void OnGoalReached() {
         playing = false;
-        DisableSphere();
+        SetSphereActive(false);
         levelWonPanel.SetActive(true);
     }
 
-    private void DisableSphere() {
-        FindObjectOfType<MainSphere>().gameObject.SetActive(false);
+    private void SetSphereActive(bool active) {
+        FindObjectOfType<MainSphere>().gameObject.SetActive(active);
     }
 
     public void OnContinueClicked() {
@@ -87,13 +109,13 @@ public class GameViewController : MonoBehaviour {
 
     public void OnPlayerDied() {
         playing = false;
-        DisableSphere();
+        SetSphereActive(false);
         playerDiedPanel.SetActive(true);
     }
  
     IEnumerator DecreaseScore() {
         while (playing) {
-            if (score > 0) {
+            if (score > 0 && !paused) {
                 score -= 1;
                 scoreText.text = score.ToString();
             }
